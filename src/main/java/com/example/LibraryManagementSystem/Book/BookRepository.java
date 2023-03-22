@@ -39,4 +39,15 @@ public class BookRepository {
                 ret.add(book);
         return ret;
     }
+    public boolean updateCopiesSoldForBook(int id,int sold){
+        if(!database.containsKey(id)) return false;
+        Book book = database.get(id);
+        book.setCopiesSold(book.getCopiesSold()+sold);
+        return true;
+    }
+    public boolean addBaseLanguage(int id,String language){
+        if(database.get(id).getBaseLanguage().length()>0) return false;
+        database.get(id).setBaseLanguage(language);
+        return true;
+    }
 }

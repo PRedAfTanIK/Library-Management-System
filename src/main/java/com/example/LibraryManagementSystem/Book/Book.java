@@ -21,6 +21,16 @@ public class Book {
         this.authorId = authorId;
     }
 
+    public Book(int id, String name, String genre, int authorId, int copiesSold, double rating, String baseLanguage) {
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.authorId = authorId;
+        this.copiesSold = copiesSold;
+        this.rating = rating;
+        this.baseLanguage = baseLanguage;
+    }
+
     public int getId() {
         return id;
     }

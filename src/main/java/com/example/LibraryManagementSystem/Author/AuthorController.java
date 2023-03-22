@@ -8,14 +8,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/Author")
 public class AuthorController {
-
     AuthorService authorService = new AuthorService();
 
-//    @PostMapping("/addByParameters")
-//    public String addAuthor(@RequestParam("id")Integer id,
-//                            @RequestParam("name")String name){
-//        return authorService.addAuthor(new Author(id,name));
-//    }
     @PostMapping("/addByParameters")
     public String addAuthor(@RequestParam("id")Integer id,
                             @RequestParam("name")String name,

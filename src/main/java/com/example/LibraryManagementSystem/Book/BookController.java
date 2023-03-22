@@ -17,12 +17,6 @@ public class BookController {
         return bookService.addBook(book);
     }
 
-//    @PostMapping("/addByPars")
-//    public String addBook(@RequestParam("id")Integer id,
-//                          @RequestParam("name")String name){
-//        return bookService.addBook(new Book(id,name));
-//    }
-
     @PostMapping("/addByPars")
     public String addBook(@RequestParam("id")Integer id,
                           @RequestParam("name")String name,
@@ -36,17 +30,38 @@ public class BookController {
     public List<Book> getAllBooks(){
         return bookService.getAllBooks();
     }
-    @GetMapping("/getBook")
+    @GetMapping("/getById")
     public Book getBook(@RequestParam("id")Integer id){
         return bookService.getBook(id);
     }
-    @GetMapping("/getBook/{name}")
+    @GetMapping("/get/{name}")
     public Book getBook(@PathVariable("name")String name){
         return bookService.getBook(name);
     }
-    @GetMapping("/getAuthor")
+    @GetMapping("/getAuthorOfBookWithId")
     public Author getAuthorOfBook(@RequestParam("id")Integer id){
         int authorId = bookService.getBook(id).getAuthorId();
         return (new AuthorController()).getAuthor(authorId);
+    }
+
+    @PutMapping("/CopiesSoldOfBook")
+    public String updateCopiesSold(@RequestParam("id")Integer id,
+                                   @RequestParam("number")Integer number){
+        return bookService.updateCopiesSold(id,number);
+    }
+    @PutMapping("/CopiesSoldOfBook/{name}={number}")
+    public String updateCopiesSold(@PathVariable("name")String name,
+                                   @PathVariable("number")Integer number){
+        return bookService.updateCopiesSold(name,number);
+    }
+    @PutMapping("/addBaseLanguage/{id}={language}")
+    public String putBaseLanguage(@PathVariable("id")Integer id,
+                                  @PathVariable("language")String language){
+        return bookService.addLanguageToBook(id,language);
+    }
+    @PutMapping("/addBaseLanguage/{name}={language}")
+    public String putBaseLanguage(@PathVariable("name")String name,
+                                  @PathVariable("language")String language){
+        return bookService.addLanguageToBook(name,language);
     }
 }
