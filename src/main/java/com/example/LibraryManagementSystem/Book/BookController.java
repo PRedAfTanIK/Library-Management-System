@@ -3,6 +3,7 @@ package com.example.LibraryManagementSystem.Book;
 import com.example.LibraryManagementSystem.Author.Author;
 import com.example.LibraryManagementSystem.Author.AuthorController;
 import com.example.LibraryManagementSystem.Author.AuthorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,19 +12,19 @@ import java.util.List;
 @RequestMapping("/Book")
 public class BookController {
 
-    BookService bookService = new BookService();
+    @Autowired
+    BookService bookService;
     @PostMapping("/addByObject")
     public String addBook(@RequestBody Book book){
         return bookService.addBook(book);
     }
 
     @PostMapping("/addByPars")
-    public String addBook(@RequestParam("id")Integer id,
-                          @RequestParam("name")String name,
+    public String addBook(@RequestParam("name")String name,
                           @RequestParam("genre")String genre,
                           @RequestParam("author id")Integer authorId){
-        (new AuthorService()).updateBookCountForAuthor(authorId);
-        return bookService.addBook(new Book(id,name,genre,authorId));
+        //(new AuthorService()).updateBookCountForAuthor(authorId);
+        return bookService.addBook(new Book(name,genre,authorId));
     }
 
     @GetMapping("/getAll")
@@ -41,7 +42,7 @@ public class BookController {
     @GetMapping("/getAuthorOfBookWithId")
     public Author getAuthorOfBook(@RequestParam("id")Integer id){
         int authorId = bookService.getBook(id).getAuthorId();
-        return (new AuthorController()).getAuthor(authorId);
+        return (new AuthorController()).getAuthor(authorId).getBody();
     }
 
     @PutMapping("/CopiesSoldOfBook")

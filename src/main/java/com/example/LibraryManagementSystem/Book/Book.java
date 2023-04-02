@@ -1,6 +1,16 @@
 package com.example.LibraryManagementSystem.Book;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Data
+@Entity
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String genre;
@@ -9,19 +19,20 @@ public class Book {
     private double rating;
     private String baseLanguage;
 
-    public Book(int id, String name) {
+    public Book() {}
+    public Book(String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Book(int id, String name, String genre, int authorId) {
+    public Book(String name, String genre, int authorId) {
         this.id = id;
         this.name = name;
         this.genre = genre;
         this.authorId = authorId;
     }
 
-    public Book(int id, String name, String genre, int authorId, int copiesSold, double rating, String baseLanguage) {
+    public Book(String name, String genre, int authorId, int copiesSold, double rating, String baseLanguage) {
         this.id = id;
         this.name = name;
         this.genre = genre;
